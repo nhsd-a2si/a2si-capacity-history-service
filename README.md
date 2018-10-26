@@ -20,4 +20,5 @@ To run the project you need a PostgreSQL DB running. Pass the following properti
 		"name": "Data Provider Service",
 		"region" : "South East"
 	}
-}```
+}
+```
