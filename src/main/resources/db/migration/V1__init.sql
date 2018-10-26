@@ -44,7 +44,7 @@ CREATE TRIGGER update_modified_column BEFORE INSERT OR UPDATE ON wait_times
 CREATE TRIGGER gard_created_column BEFORE INSERT OR UPDATE ON wait_times
   FOR EACH ROW EXECUTE PROCEDURE gard_created_column();
 
--- Adds teh constrains to service
+-- Adds the constrains to service
 CREATE TRIGGER update_modified_column BEFORE INSERT OR UPDATE ON service
   FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
 CREATE TRIGGER gard_created_column BEFORE INSERT OR UPDATE ON service
