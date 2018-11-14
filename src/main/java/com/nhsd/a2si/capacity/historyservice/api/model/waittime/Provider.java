@@ -1,4 +1,4 @@
-package com.nhsd.a2si.capacity.historyservice.api.model;
+package com.nhsd.a2si.capacity.historyservice.api.model.waittime;
 
 import javax.validation.constraints.NotNull;
 

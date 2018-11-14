@@ -1,9 +1,9 @@
-package com.nhsd.a2si.capacity.historyservice.services;
+package com.nhsd.a2si.capacity.historyservice.services.waittime;
 
 import com.nhsd.a2si.capacity.historyservice.data.ServiceRepository;
-import com.nhsd.a2si.capacity.historyservice.data.WaitTimeRepository;
-import com.nhsd.a2si.capacity.historyservice.data.model.Service;
-import com.nhsd.a2si.capacity.historyservice.data.model.WaitTime;
+import com.nhsd.a2si.capacity.historyservice.data.repository.waittime.WaitTimeRepository;
+import com.nhsd.a2si.capacity.historyservice.data.model.waittime.Service;
+import com.nhsd.a2si.capacity.historyservice.data.model.waittime.WaitTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
@@ -23,7 +23,7 @@ public class WaitTimeService {
      * @param swt The Service Wait time Object
      * @return The newly created wait time record.
      */
-    public WaitTime store(com.nhsd.a2si.capacity.historyservice.api.model.WaitTime swt){
+    public WaitTime store(com.nhsd.a2si.capacity.historyservice.api.model.waittime.WaitTime swt){
         Service service = getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(swt);
         WaitTime waitTime = new WaitTime();
         waitTime.setWaitTimeInMinutes(swt.getWaitTimeInMinutes());
@@ -34,7 +34,7 @@ public class WaitTimeService {
         return waitTimeRepository.save(waitTime);
     }
 
-    private Service getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(com.nhsd.a2si.capacity.historyservice.api.model.WaitTime swt) {
+    private Service getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(com.nhsd.a2si.capacity.historyservice.api.model.waittime.WaitTime swt) {
         return checkServiceNameMatchOrUpdate(getOrCreateService(swt.getService().getId(), swt.getService().getName()), swt.getService().getName());
     }
 

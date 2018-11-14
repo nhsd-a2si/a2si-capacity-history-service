@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nhsd.a2si.capacity</groupId>
-    <artifactId>a2si-capacity-history-service</artifactId>
+    <artifactId>a2si-capacity-reporting-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>a2si-capacity-history-service</name>
+    <name>a2si-capacity-reporting-service</name>
     <description>An historical wait time data services</description>
 
     <parent>

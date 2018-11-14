@@ -1,51 +1,19 @@
--- Service
-CREATE TABLE service (
-  service_id VARCHAR(12) PRIMARY KEY,
-  service_name VARCHAR(100),
-  created TIMESTAMP DEFAULT NOW(),
-  modified TIMESTAMP
+CREATE TABLE log_header (
+  id BIGSERIAL PRIMARY KEY,
+  action VARCHAR(4),
+  component VARCHAR(25),
+  user_id VARCHAR(25),
+  endpoint VARCHAR(255),
+  req_res_hashcode VARCHAR(10),
+  timestamp TIMESTAMP DEFAULT NOW()
 );
 
--- Wait times
-CREATE TABLE wait_times (
-  wait_time_id BIGSERIAL PRIMARY KEY,
-  last_updated TIMESTAMP,
-  service_id VARCHAR(12) REFERENCES service(service_id),
+CREATE TABLE log_detail (
+  id BIGSERIAL PRIMARY KEY,
+  header_id BIGINT REFERENCES log_header(id),
+  service_id VARCHAR(30),
+  timestamp TIMESTAMP DEFAULT NOW(),
   wait_time_in_minutes INT,
-  region VARCHAR(100),
-  provider VARCHAR(100),
-  created TIMESTAMP DEFAULT NOW(),
-  modified TIMESTAMP
+  age_in_minutes INT
 );
 
--- Last modified function
-CREATE OR REPLACE FUNCTION update_modified_column()
-  RETURNS TRIGGER AS $$
-BEGIN
-  NEW.modified = now();
-  RETURN NEW;
-END;
-$$ language 'plpgsql';
-
--- Gard the date created from being modified.
-CREATE OR REPLACE FUNCTION gard_created_column()
-  RETURNS TRIGGER AS $$
-BEGIN
-  IF tg_op = 'UPDATE' THEN
-    NEW.created = OLD.created;
-  END IF;
-  RETURN NEW;
-END;
-$$ language 'plpgsql';
-
--- Adds the constraints to wait_times
-CREATE TRIGGER update_modified_column BEFORE INSERT OR UPDATE ON wait_times
-  FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
-CREATE TRIGGER gard_created_column BEFORE INSERT OR UPDATE ON wait_times
-  FOR EACH ROW EXECUTE PROCEDURE gard_created_column();
-
--- Adds the constrains to service
-CREATE TRIGGER update_modified_column BEFORE INSERT OR UPDATE ON service
-  FOR EACH ROW EXECUTE PROCEDURE update_modified_column();
-CREATE TRIGGER gard_created_column BEFORE INSERT OR UPDATE ON service
-  FOR EACH ROW EXECUTE PROCEDURE gard_created_column();

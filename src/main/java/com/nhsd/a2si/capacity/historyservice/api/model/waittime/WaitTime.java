@@ -1,12 +1,10 @@
-package com.nhsd.a2si.capacity.historyservice.api.model;
+package com.nhsd.a2si.capacity.historyservice.api.model.waittime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.nhsd.a2si.capacity.historyservice.data.model.Service;
+import com.nhsd.a2si.capacity.historyservice.data.model.waittime.Service;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 /**
