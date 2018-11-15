@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>a2si-capacity-reporting-service</name>
+    <name>capacity-reporting-service</name>
     <description>An historical wait time data services</description>
 
     <parent>
