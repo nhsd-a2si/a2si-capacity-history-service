@@ -1,6 +1,6 @@
 -- Service
 CREATE TABLE service (
-  service_id SERIAL PRIMARY KEY,
+  service_id VARCHAR(30) PRIMARY KEY,
   service_name VARCHAR(100),
   created TIMESTAMP DEFAULT NOW(),
   modified TIMESTAMP
@@ -10,7 +10,7 @@ CREATE TABLE service (
 CREATE TABLE wait_times (
   wait_time_id BIGSERIAL PRIMARY KEY,
   last_updated TIMESTAMP,
-  service_id int REFERENCES service(service_id),
+  service_id VARCHAR(30) REFERENCES service(service_id),
   wait_time_in_minutes INT,
   region VARCHAR(100),
   provider VARCHAR(100),

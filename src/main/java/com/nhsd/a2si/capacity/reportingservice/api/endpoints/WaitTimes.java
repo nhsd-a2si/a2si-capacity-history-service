@@ -20,9 +20,12 @@ public class WaitTimes {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addWaitTime(@Valid com.nhsd.a2si.capacity.reportingservice.api.model.waittime.WaitTime waitTime) {
+    public Response addWaitTime(@Valid com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime waitTime) {
         WaitTime wt = waitTimeService.store(waitTime);
-        return Response.created(URI.create("/wait-times/" + wt.getId())).build();
+        return Response
+                .created(URI.create("/wait-times/" + wt.getId()))
+                .entity(wt)
+                .build();
     }
 
 }

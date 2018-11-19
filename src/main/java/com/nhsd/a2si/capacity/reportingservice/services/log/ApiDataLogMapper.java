@@ -1,7 +1,9 @@
 package com.nhsd.a2si.capacity.reportingservice.services.log;
 
-import com.nhsd.a2si.capacity.reportingservice.api.model.log.Detail;
-import com.nhsd.a2si.capacity.reportingservice.api.model.log.Header;
+
+
+import com.nhsd.a2si.capacity.reporting.service.dto.log.Detail;
+import com.nhsd.a2si.capacity.reporting.service.dto.log.Header;
 
 import java.util.stream.Collectors;
 
@@ -36,7 +38,7 @@ public class ApiDataLogMapper {
     }
 
     // Convert API model to DB model.
-    public static com.nhsd.a2si.capacity.reportingservice.data.model.log.Header map(com.nhsd.a2si.capacity.reportingservice.api.model.log.Header header) {
+    public static com.nhsd.a2si.capacity.reportingservice.data.model.log.Header map(com.nhsd.a2si.capacity.reporting.service.dto.log.Header header) {
         com.nhsd.a2si.capacity.reportingservice.data.model.log.Header h = new com.nhsd.a2si.capacity.reportingservice.data.model.log.Header();
         h.setAction(header.getAction());
         h.setComponent(header.getComponent());
@@ -49,7 +51,7 @@ public class ApiDataLogMapper {
     }
 
     // Convert API model to DB model.
-    public static com.nhsd.a2si.capacity.reportingservice.data.model.log.Detail map(com.nhsd.a2si.capacity.reportingservice.api.model.log.Detail detail, com.nhsd.a2si.capacity.reportingservice.data.model.log.Header header) {
+    public static com.nhsd.a2si.capacity.reportingservice.data.model.log.Detail map(com.nhsd.a2si.capacity.reporting.service.dto.log.Detail detail, com.nhsd.a2si.capacity.reportingservice.data.model.log.Header header) {
         com.nhsd.a2si.capacity.reportingservice.data.model.log.Detail d = new com.nhsd.a2si.capacity.reportingservice.data.model.log.Detail();
         d.setAgeInMinutes(detail.getAgeInMinutes());
         d.setServiceId(detail.getServiceId());

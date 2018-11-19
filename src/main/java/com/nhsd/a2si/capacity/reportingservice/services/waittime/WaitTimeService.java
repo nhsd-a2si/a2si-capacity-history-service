@@ -23,7 +23,7 @@ public class WaitTimeService {
      * @param swt The Service Wait time Object
      * @return The newly created wait time record.
      */
-    public WaitTime store(com.nhsd.a2si.capacity.reportingservice.api.model.waittime.WaitTime swt){
+    public WaitTime store(com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime swt){
         Service service = getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(swt);
         WaitTime waitTime = new WaitTime();
         waitTime.setWaitTimeInMinutes(swt.getWaitTimeInMinutes());
@@ -34,7 +34,7 @@ public class WaitTimeService {
         return waitTimeRepository.save(waitTime);
     }
 
-    private Service getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(com.nhsd.a2si.capacity.reportingservice.api.model.waittime.WaitTime swt) {
+    private Service getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime swt) {
         return checkServiceNameMatchOrUpdate(getOrCreateService(swt.getService().getId(), swt.getService().getName()), swt.getService().getName());
     }
 

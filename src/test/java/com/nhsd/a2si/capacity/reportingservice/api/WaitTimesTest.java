@@ -1,9 +1,9 @@
 package com.nhsd.a2si.capacity.reportingservice.api;
 
 import com.nhsd.a2si.capacity.reportingservice.api.endpoints.WaitTimes;
-import com.nhsd.a2si.capacity.reportingservice.api.model.waittime.Provider;
-import com.nhsd.a2si.capacity.reportingservice.api.model.waittime.Service;
-import com.nhsd.a2si.capacity.reportingservice.api.model.waittime.WaitTime;
+import com.nhsd.a2si.capacity.reporting.service.dto.waittime.Provider;
+import com.nhsd.a2si.capacity.reporting.service.dto.waittime.Service;
+import com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime;
 import com.nhsd.a2si.capacity.reportingservice.data.repository.waittime.ServiceRepository;
 import com.nhsd.a2si.capacity.reportingservice.data.repository.waittime.WaitTimeRepository;
 import org.junit.Test;

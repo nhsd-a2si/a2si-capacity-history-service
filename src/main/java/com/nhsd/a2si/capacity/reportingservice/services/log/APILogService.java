@@ -1,7 +1,7 @@
 package com.nhsd.a2si.capacity.reportingservice.services.log;
 
-import com.nhsd.a2si.capacity.reportingservice.api.model.log.Header;
-import com.nhsd.a2si.capacity.reportingservice.api.model.log.Detail;
+import com.nhsd.a2si.capacity.reporting.service.dto.log.Header;
+import com.nhsd.a2si.capacity.reporting.service.dto.log.Detail;
 import com.nhsd.a2si.capacity.reportingservice.data.repository.log.DetailRepository;
 import com.nhsd.a2si.capacity.reportingservice.data.repository.log.HeaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;

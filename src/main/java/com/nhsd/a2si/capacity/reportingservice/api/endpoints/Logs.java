@@ -1,7 +1,7 @@
 package com.nhsd.a2si.capacity.reportingservice.api.endpoints;
 
-import com.nhsd.a2si.capacity.reportingservice.api.model.log.Detail;
-import com.nhsd.a2si.capacity.reportingservice.api.model.log.Header;
+import com.nhsd.a2si.capacity.reporting.service.dto.log.Detail;
+import com.nhsd.a2si.capacity.reporting.service.dto.log.Header;
 import com.nhsd.a2si.capacity.reportingservice.services.log.APILogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 @Component
@@ -38,34 +40,28 @@ public class Logs {
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Header postLogHeader(String action, String endpoint, String username) {
-       /* HeaderLog headerLog = new HeaderLog();
-        headerLog.setAction(action);
-        headerLog.setComponent("capacity-service");
-        headerLog.setEndpoint(endpoint);
-        headerLog.setHashcode(null);
-        headerLog.setTimestamp(new Date());
-        headerLog.setUserId(username);
-        logService.saveHeader(headerLog);
-        return headerLog;*/
-       return null;
+    public Response postLogHeader(@Valid Header header) {
+        Header h = logOutputService.saveHeader(header);
+        return Response
+                .created(URI.create("/log/" + h.getId()))
+                .entity(h)
+                .build();
     }
 
     @POST
     @Path("/{header-id}/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Header postLogDetail(@Valid Detail detail, @PathParam("header-id") String header) {
-       /* HeaderLog headerLog = new HeaderLog();
-        headerLog.setAction(action);
-        headerLog.setComponent("capacity-service");
-        headerLog.setEndpoint(endpoint);
-        headerLog.setHashcode(null);
-        headerLog.setTimestamp(new Date());
-        headerLog.setUserId(username);
-        logService.saveHeader(headerLog);
-        return headerLog;*/
-        return null;
+    public Response postLogDetail(@Valid Detail detail, @PathParam("header-id") long header) {
+        Detail d = logOutputService.saveDetails(detail, header);
+        if(d != null) {
+            return Response
+                    .created(URI.create("/log/" + header + "/" + d.getId()))
+                    .entity(d)
+                    .build();
+        }
+        // Error response
+        return Response.status(Response.Status.NOT_FOUND.getStatusCode(), "Resource not found: /log/" + header + "/").build();
     }
 
 

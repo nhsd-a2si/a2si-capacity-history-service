@@ -1,6 +1,7 @@
 package com.nhsd.a2si.capacity.reportingservice;
 
 
+import com.nhsd.a2si.capacity.reportingservice.api.endpoints.Logs;
 import com.nhsd.a2si.capacity.reportingservice.api.endpoints.WaitTimes;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.boot.SpringApplication;
@@ -12,7 +13,9 @@ public class ReportingServiceApplication {
 
     @Bean
     ResourceConfig resourceConfig() {
-        return new ResourceConfig().register(WaitTimes.class);
+        return new ResourceConfig()
+                .register(WaitTimes.class)
+                .register(Logs.class);
     }
 
     public static void main(String[] args) {
