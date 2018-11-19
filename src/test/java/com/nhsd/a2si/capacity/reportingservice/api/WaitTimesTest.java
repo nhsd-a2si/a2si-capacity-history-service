@@ -18,20 +18,20 @@ import java.util.Date;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+//@RunWith(SpringRunner.class)
+//@SpringBootTest
 public class WaitTimesTest {
 
-    @Autowired
+    //@Autowired
     private WaitTimeRepository waitTimeRepository;
 
-    @Autowired
+    //@Autowired
     private ServiceRepository serviceRepository;
 
-    @Autowired
+    //@Autowired
     private WaitTimes waitTimes;
 
-    @Test
+    //@Test
     public void create(){
 
         WaitTime waitTime = new WaitTime();
