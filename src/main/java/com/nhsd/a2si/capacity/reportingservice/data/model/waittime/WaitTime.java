@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="wait_times")
-public class WaitTime {
+public final class WaitTime {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -80,5 +80,32 @@ public class WaitTime {
 
     public void setWaitTimeInMinutes(long waitTimeInMinutes) {
         this.waitTimeInMinutes = waitTimeInMinutes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        WaitTime waitTime = (WaitTime) o;
+
+        if (id != waitTime.id) return false;
+        if (waitTimeInMinutes != waitTime.waitTimeInMinutes) return false;
+        if (lastUpdated != null ? !lastUpdated.equals(waitTime.lastUpdated) : waitTime.lastUpdated != null)
+            return false;
+        if (region != null ? !region.equals(waitTime.region) : waitTime.region != null) return false;
+        if (provider != null ? !provider.equals(waitTime.provider) : waitTime.provider != null) return false;
+        return service != null ? service.equals(waitTime.service) : waitTime.service == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (lastUpdated != null ? lastUpdated.hashCode() : 0);
+        result = 31 * result + (region != null ? region.hashCode() : 0);
+        result = 31 * result + (provider != null ? provider.hashCode() : 0);
+        result = 31 * result + (int) (waitTimeInMinutes ^ (waitTimeInMinutes >>> 32));
+        result = 31 * result + (service != null ? service.hashCode() : 0);
+        return result;
     }
 }

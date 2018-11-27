@@ -6,7 +6,10 @@ import com.nhsd.a2si.capacity.reportingservice.data.model.waittime.Service;
 import com.nhsd.a2si.capacity.reportingservice.data.model.waittime.WaitTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @org.springframework.stereotype.Service
 public class WaitTimeService {
@@ -56,4 +59,27 @@ public class WaitTimeService {
         service.setName(name);
         return serviceRepository.save(service);
     }
+
+
+    public Iterable<WaitTime> getAll(List<Long> ids){
+        return waitTimeRepository.findAllById(ids);
+    }
+
+    public List<WaitTime> getAll(){
+         return StreamSupport.stream(waitTimeRepository.findAll().spliterator(), false).collect(Collectors.toList());
+    }
+
+    public List<WaitTime> getAllByServiceIds(List<String> ids){
+        return waitTimeRepository.findAllByIdServiceId(ids);
+    }
+
+    public List<WaitTime> getAllByRegions(List<String> regions) {
+        return waitTimeRepository.getAllByRegion(regions);
+    }
+
+    public List<WaitTime> getAllByProviders(List<String> providers) {
+        return waitTimeRepository.getAllByProvider(providers);
+    }
+
+
 }
