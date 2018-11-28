@@ -85,16 +85,16 @@ public class WaitTimes {
         return Response.ok().entity(results.stream()
                 .filter(r -> {
                     try {
-                        return after != null ? r.getLastUpdated().after(formatter.parse(after)) : true;
+                        return isDate(after) ? r.getLastUpdated().after(formatter.parse(after)) : true;
                     } catch (ParseException e) {
-                        // This should never happen, see prerequisite;
+                        // This should never happen, see isDate;
                         return true;
                     }
                 }).filter(r -> {
                     try {
-                        return before != null ? r.getLastUpdated().before(formatter.parse(before)) : true;
+                        return isDate(before) ? r.getLastUpdated().before(formatter.parse(before)) : true;
                     } catch (ParseException e) {
-                        // This should never happen, see prerequisite;
+                        // This should never happen, see isDate;
                         return true;
                     }
                 }).collect(Collectors.toList())).build();

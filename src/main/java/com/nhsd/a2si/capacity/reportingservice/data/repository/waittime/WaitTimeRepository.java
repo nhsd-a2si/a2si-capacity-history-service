@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface WaitTimeRepository extends CrudRepository<WaitTime, Long>, WaitTimeServiceRepository {
-    List<WaitTime> getAllByRegion(List<String> region);
     List<WaitTime> getAllByProvider(List<String> provider);
 }

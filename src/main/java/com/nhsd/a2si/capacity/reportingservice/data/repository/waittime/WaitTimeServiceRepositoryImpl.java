@@ -19,4 +19,11 @@ public class WaitTimeServiceRepositoryImpl implements WaitTimeServiceRepository 
         query.setParameter("ids", ids);
         return query.getResultList();
     }
+
+    @Override
+    public List<WaitTime> getAllByRegion(List<String> region) {
+        TypedQuery<WaitTime> query = entityManager.createQuery("SELECT wt FROM WaitTime wt WHERE wt.service.region IN (:region)", WaitTime.class);
+        query.setParameter("region", region);
+        return query.getResultList();
+    }
 }

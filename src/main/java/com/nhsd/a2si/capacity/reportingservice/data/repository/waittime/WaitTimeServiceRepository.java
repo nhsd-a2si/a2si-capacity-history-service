@@ -11,4 +11,6 @@ public interface WaitTimeServiceRepository {
     }
 
     List<WaitTime> findAllByIdServiceId(List<String> ids);
+
+    List<WaitTime> getAllByRegion(List<String> region);
 }

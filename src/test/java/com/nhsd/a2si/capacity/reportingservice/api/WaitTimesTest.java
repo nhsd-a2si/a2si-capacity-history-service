@@ -39,7 +39,7 @@ public class WaitTimesTest {
         waitTime.setWaitTimeInMinutes(30);
         Provider provider = new Provider();
         provider.setName("Henbary");
-        provider.setRegion("Devon");
+        //provider.setRegion("Devon");
         waitTime.setProvider(provider);
         Service service = new Service();
         service.setId("ABC123");

@@ -27,21 +27,20 @@ public class WaitTimeService {
      * @return The newly created wait time record.
      */
     public WaitTime store(com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime swt){
-        Service service = getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(swt);
+        Service service = getOrCreateServiceAndCheckTheDetailsMatchesOrUpdateTheDetails(swt);
         WaitTime waitTime = new WaitTime();
         waitTime.setWaitTimeInMinutes(swt.getWaitTimeInMinutes());
         waitTime.setService(service);
         waitTime.setProvider(swt.getProvider().getName());
-        waitTime.setRegion(swt.getProvider().getName());
         waitTime.setLastUpdated(swt.getUpdated());
         return waitTimeRepository.save(waitTime);
     }
 
-    private Service getOrCreateServiceAndCheckTheNameMatchesOrUpdateTheName(com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime swt) {
-        return checkServiceNameMatchOrUpdate(getOrCreateService(swt.getService().getId(), swt.getService().getName()), swt.getService().getName());
+    private Service getOrCreateServiceAndCheckTheDetailsMatchesOrUpdateTheDetails(com.nhsd.a2si.capacity.reporting.service.dto.waittime.WaitTime swt) {
+        return checkRegionNameMatchOrUpdate(checkServiceNameMatchOrUpdate(getOrCreateService(swt.getService().getId(), swt.getService().getName(), swt.getService().getRegion()), swt.getService().getName()), swt.getService().getRegion());
     }
 
-    private Service getOrCreateService(String id, String name) {
+    private Service getOrCreateService(String id, String name, String region) {
         Optional<Service> service = serviceRepository.findById(id);
         if (service.isPresent()) {
             return service.get();
@@ -49,7 +48,16 @@ public class WaitTimeService {
         Service newService = new Service();
         newService.setId(id);
         newService.setName(name);
+        newService.setRegion(region);
         return serviceRepository.save(newService);
+    }
+
+    private Service checkRegionNameMatchOrUpdate(Service service, String region) {
+        if(service.getRegion().equalsIgnoreCase(region)){
+            return service;
+        }
+        service.setRegion(region);
+        return serviceRepository.save(service);
     }
 
     private Service checkServiceNameMatchOrUpdate(Service service, String name) {

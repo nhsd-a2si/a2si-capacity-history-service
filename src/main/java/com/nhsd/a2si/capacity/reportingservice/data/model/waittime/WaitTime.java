@@ -19,10 +19,6 @@ public final class WaitTime {
     @Column(name = "last_updated")
     private Date lastUpdated;
 
-    @Column(name = "region")
-    @Size(max = 100)
-    private String region;
-
     @Column(name = "provider")
     @Size(max = 100)
     private String provider;
@@ -50,13 +46,6 @@ public final class WaitTime {
         this.lastUpdated = lastUpdated;
     }
 
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
 
     public String getProvider() {
         return provider;
@@ -93,7 +82,6 @@ public final class WaitTime {
         if (waitTimeInMinutes != waitTime.waitTimeInMinutes) return false;
         if (lastUpdated != null ? !lastUpdated.equals(waitTime.lastUpdated) : waitTime.lastUpdated != null)
             return false;
-        if (region != null ? !region.equals(waitTime.region) : waitTime.region != null) return false;
         if (provider != null ? !provider.equals(waitTime.provider) : waitTime.provider != null) return false;
         return service != null ? service.equals(waitTime.service) : waitTime.service == null;
     }
@@ -102,7 +90,6 @@ public final class WaitTime {
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (lastUpdated != null ? lastUpdated.hashCode() : 0);
-        result = 31 * result + (region != null ? region.hashCode() : 0);
         result = 31 * result + (provider != null ? provider.hashCode() : 0);
         result = 31 * result + (int) (waitTimeInMinutes ^ (waitTimeInMinutes >>> 32));
         result = 31 * result + (service != null ? service.hashCode() : 0);
