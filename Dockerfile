@@ -4,8 +4,8 @@ VOLUME /tmp
 ADD ./target/a2si-capacity-reporting-service-@{version}.jar a2si-capacity-reporting-service.jar
 ADD ./keystore.jks keystore.jks
 
-# Expose 7030, the default port used for Dos Proxy
-EXPOSE 7030
+# Expose 7060, the default port used for Dos Proxy
+EXPOSE 7060
 ENV JAVA_OPTS=""
 RUN ["apk", "update"]
 RUN ["apk", "add", "tzdata"]
