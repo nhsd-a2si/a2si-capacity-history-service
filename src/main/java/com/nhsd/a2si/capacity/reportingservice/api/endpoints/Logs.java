@@ -37,7 +37,7 @@ public class Logs {
     }
 
     @POST
-    @Path("/")
+    //@Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postLogHeader(@Valid Header header) {

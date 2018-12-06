@@ -5,6 +5,8 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
+  jersey:
+    application-path: api
 
 server:
   port: 7060
@@ -24,3 +26,4 @@ management:
       path-mapping:
         health: /healthcheck
       base-path: /
+  add-application-context-header: false

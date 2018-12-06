@@ -13,6 +13,7 @@ public class ReportingServiceApplication {
 
     @Bean
     ResourceConfig resourceConfig() {
+        // If you need to add a new endpoint, include it here so that it is added at boot.
         return new ResourceConfig()
                 .register(WaitTimes.class)
                 .register(Logs.class);
