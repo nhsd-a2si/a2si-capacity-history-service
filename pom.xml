@@ -5,7 +5,7 @@
 
     <groupId>com.nhsd.a2si.capacity</groupId>
     <artifactId>a2si-capacity-reporting-service</artifactId>
-    <version>0.0.1</version>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>capacity-reporting-service</name>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.nhsd.a2si</groupId>
             <artifactId>a2si-capacity-reporting-service-client</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
