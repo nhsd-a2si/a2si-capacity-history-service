@@ -1,3 +1,7 @@
+capacity:
+  service:
+    user: CAPACITY_SERVICE
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5454/capacity_service

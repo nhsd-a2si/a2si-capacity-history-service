@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Component
@@ -32,15 +34,42 @@ public class UserAuthenticationProvider implements AuthenticationProvider {
 
     @Value("${amazon.aws.dynamo.table}")
     private  String dynamoAuthenticationTableName;
-
+    
+    @Value("${capacity.service.user}")
+    private String CAPACITY_SERVICE_USER;
+    
+    /**
+     * Stores authorised users that are internal so that we only call the authentication
+     * database once.
+     */
+    private static Map<String, String> authorisedUsers = new HashMap<>();
 
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException 
+    {
         final String username    = authentication.getName();
         final String credentials = authentication.getCredentials().toString();
+        
+        // Check authorised users.
+        if(authorisedUsers.containsKey(username)
+        		&& passwordEncoder.matches(credentials, authorisedUsers.get(username)))
+        {
+        	return new UsernamePasswordAuthenticationToken(username, credentials, Collections.emptySet());
+        }
+        
         Item item = getItemByUsername(username);
-        if(Objects.nonNull(item)) {
-            if(passwordEncoder.matches(authentication.getCredentials().toString(), item.getString("SALTED_PASSWORD"))){
+        if(Objects.nonNull(item)) 
+        {
+            if(passwordEncoder.matches(authentication.getCredentials().toString(), item.getString("SALTED_PASSWORD")))
+            {
+            	// If user is internal, add to the authorised users map so we only call
+            	// authentication database once for internal calls
+            	if (CAPACITY_SERVICE_USER.equals(item.getString("CLIENT_ID")))
+            	{
+            		authorisedUsers.put(item.getString("USERNAME"), item.getString("SALTED_PASSWORD"));
+            	}
+            	
+            	
                 return new UsernamePasswordAuthenticationToken(username, credentials, Collections.emptySet());
             }
         }
